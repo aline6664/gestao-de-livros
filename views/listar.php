@@ -5,8 +5,8 @@
 <head>
     <meta charset="UTF-8">
     <title>Listagem de Livros</title>
-    <link rel="stylesheet" type="text/css" href="./styles/lista.css">
-    <link rel="stylesheet" type="text/css" href="../style.css">
+    <link rel="stylesheet" type="text/css" href="../styles/lista.css">
+    <link rel="stylesheet" type="text/css" href="../styles/style.css">
 </head>
 <body>
     <div class="list-container">

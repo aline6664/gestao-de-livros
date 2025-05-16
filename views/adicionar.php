@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <title>Adicionar livro</title>
-    <link rel="stylesheet" type="text/css" href="./styles/form.css">
-    <link rel="stylesheet" type="text/css" href="../style.css">
+    <link rel="stylesheet" type="text/css" href="../styles/form.css">
+    <link rel="stylesheet" type="text/css" href="../styles/style.css">
 </head>
 <body>
     <div class="form-container">
