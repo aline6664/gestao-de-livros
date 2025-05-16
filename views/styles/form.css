@@ -1,0 +1,79 @@
+.form-container {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.form-card {
+    color: #ffffff;
+    background-color: var(--green);
+    padding: 20px;
+    width: 100%;
+    margin-bottom: 30px;
+    border: 1px dotted black;
+}
+
+form {
+    border-radius: 5px;
+    background-color: #ebebeb;
+    padding: 2rem;
+    width: 500px;
+    box-shadow: 4px 4px 3px #cfcfcf;
+}
+
+input[type=text], input[type=number], select {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    font-size: 15px;
+}
+
+input[type=text]:focus {
+    background-color: #e8edef;
+}
+
+label {
+    margin: 5px;
+}
+
+.botoes {
+    display: flex;
+    justify-content: center;
+    font-size: 14px;
+}
+
+/* Cores dos botões */
+input[type=submit] {
+    background-color: var(--green);
+}
+
+input[type=reset] {
+    background-color: var(--dark-grey);
+}
+
+a#cancelar {
+    background-color: var(--red);
+}
+
+/* Hovers */
+input[type=submit]:hover {
+    background-color: var(--green-hover);
+}
+
+input[type=reset]:hover {
+    background-color: var(--dark-grey-hover);
+}
+
+a#cancelar:hover {
+    background-color: var(--red-hover);
+}
+
+input[type=submit], input[type=reset], a#cancelar {
+    width: 50%;
+}

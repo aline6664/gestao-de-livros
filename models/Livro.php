@@ -17,16 +17,12 @@ class Livro {
     }
 
     // REGISTRAR LIVRO
-    public function criar() {
+    public function salvar($titulo, $autor, $ano_publicacao, $categoria) {
         // inserir usando parâmetros
-        $comandoSQL = "INSERT INTO `{$this->tableName}` (titulo, autor, ano_publicacao, categoria) VALUES (:param1, :param2, :param3, :param4)";
+        $comandoSQL = "INSERT INTO `{$this->tableName}` (titulo, autor, ano_publicacao, categoria) VALUES (?, ?, ?, ?)";
         try {
             $acesso = $this->conexao->prepare($comandoSQL);
-            $acesso->bindParam(':param1', $titulo);
-            $acesso->bindParam(':param2', $autor);
-            $acesso->bindParam(':param3', $ano_publicacao);
-            $acesso->bindParam(':param4', $categoria);
-            $acesso->execute();
+            $acesso->execute([$titulo, $autor, $ano_publicacao, $categoria]);
         }
         catch (PDOException $erro) {
             echo "Erro ao registrar o livro: " . $erro->getMessage();
@@ -35,8 +31,7 @@ class Livro {
 
     // LISTAR TODOS LIVROS REGISTRADOS
     public function listar() {
-        var_dump($this->table_name);
-        $comandoSQL = "SELECT * FROM `{$this->table_name}` ORDER BY `id` DESC"; // ordenar por ID
+        $comandoSQL = "SELECT * FROM `{$this->tableName}` ORDER BY `id` DESC"; // ordenar por ID
         try {
             $acesso = $this->conexao->prepare($comandoSQL); // prepare() valida o comando SQL para o acesso
             $acesso->execute(); // executa o comando SQL
@@ -47,33 +42,26 @@ class Livro {
         }
     }
 
-    /*
-    // BUSCAR CLIENTE PELO NOME
-    public function buscarNome($nomeBusca) {
-        // retornar linha(s) da tabela com o nome igual
-        $comandoSQL = "SELECT * FROM {$this->tableName} WHERE nome = :nome";
+    // BUSCAR LIVRO PELO ID (usado para alterar e excluir)
+    public function buscarPorId($id) {
+        // retornar linha da tabela com o id igual
+        $comandoSQL = "SELECT * FROM {$this->tableName} WHERE id = ?";
         try {
             $acesso = $this->conexao->prepare($comandoSQL);
-            $acesso->bindParam(':nome', $nomeBusca); // passando o parâmetro para o comando SQL
-            $acesso->execute();
-            return $acesso->fetchAll(PDO::FETCH_ASSOC); // retorna as linhas encontradas
+            $acesso->execute([$id]);
+            return $acesso->fetch(PDO::FETCH_ASSOC); // retorna a linha encontrada
         }
         catch (PDOException $erro) {
-            echo "Erro ao recuperar cliente(s) por nome: " . $erro->getMessage();
+            echo "Erro ao encontrar o livro: " . $erro->getMessage();
         }
     }
-    */
 
     // ALTERAR DADOS DO LIVRO
     public function alterar($id, $titulo, $autor, $ano_publicacao, $categoria) {
-        $comandoSQL = "UPDATE `{$this->tableName}` SET `titulo = :param1, autor = :param2, ano_publicacao = :param3, categoria = :param4`";
+        $comandoSQL = "UPDATE `{$this->tableName}` SET titulo = ?, autor = ?, ano_publicacao = ?, categoria = ? WHERE id = ?";
         try {
             $acesso = $this->conexao->prepare($comandoSQL);
-            $acesso->bindParam(':param1', $titulo);
-            $acesso->bindParam(':param2', $autor);
-            $acesso->bindParam(':param3', $ano_publicacao);
-            $acesso->bindParam(':param4', $categoria);
-            return $acesso->execute([$id, $titulo, $autor, $ano_publicacao, $categoria]);    
+            return $acesso->execute([$titulo, $autor, $ano_publicacao, $categoria, $id]);    
         }
         catch (PDOException $erro) {
             echo "Erro ao alterar dados do livro: " . $erro->getMessage();
@@ -82,11 +70,10 @@ class Livro {
 
     // APAGAR LIVRO
     public function excluir($id) {
-        $comandoSQL = "DELETE FROM `{$this->table_name}` WHERE `id = :id`";
+        $comandoSQL = "DELETE FROM `{$this->tableName}` WHERE id = ?";
         try {
             $acesso = $this->conexao->prepare($comandoSQL);
-            $acesso->bindParam(':id', $id);
-            $acesso->execute();
+            $acesso->execute([$id]);
         }
         catch (PDOException $erro) {
             echo "Erro ao excluir o livro: " . $erro->getMessage();

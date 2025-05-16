@@ -3,7 +3,7 @@
 class Database {
     // valores padrões
     private $host = 'localhost';
-    private $db_name = 'banco_sistema';
+    private $db_name = 'biblioteca';
     private $username = 'root';
     private $password = '';
     private $DBConn; // conexao com o banco
@@ -22,7 +22,7 @@ class Database {
         try {
             // conexão
             $this->DBConn = new PDO('mysql:host=' . $this->host, $this->username, $this->password);
-            echo "Conexão bem-sucedida!"; // para verificar se conexão funcionou
+            // echo "Conexão bem-sucedida!"; // para verificar se conexão funcionou
 
             $this->DBConn->exec('CREATE DATABASE IF NOT EXISTS ' . $this->db_name);
 

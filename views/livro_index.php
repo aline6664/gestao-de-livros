@@ -1,5 +1,6 @@
 <?php
     require_once "../controllers/LivroController.php";
+    session_start();
 
 $controller = new LivroController();
 
@@ -14,8 +15,8 @@ switch ($acao) {
     case 'editar':
         $controller->editarForm();
         break;
-    case 'atualizar':
-        $controller->atualizar();
+    case 'alterar':
+        $controller->alterar();
         break;
     case 'excluir':
         $controller->excluir();
